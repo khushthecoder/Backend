@@ -1,0 +1,36 @@
+# Node modules (bahut heavy hote hain, GitHub pe nahi chahiye)
+node_modules/
+
+# Environment variables (API keys, DB passwords, etc.)
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build / Dist folders
+dist/
+build/
+coverage/
+
+# Cache
+.cache/
+.tmp/
+
+# Prisma
+.prisma/
+migrations/
+
+# VSCode / IDE settings
+.vscode/
+.idea/
+
+# Others
+*.swp
+*.swo
