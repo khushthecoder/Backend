@@ -34,3 +34,4 @@ migrations/
 # Others
 *.swp
 *.swo
+*.env
