@@ -27,3 +27,4 @@ db();
 app.get("/", (req, res) => {
   res.send("Hello from Todo API");
 });
+//now run the server using node index.js
