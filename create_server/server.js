@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 
 app.use(express.json());
+//ye line middleware ki he jo kaam aati me request ki body me data pass kar raha ho ta he 
 // const bodyParser=require('body-parser')
 // app.use(bodyParser.json())
 // const bodyParser = require('body-parser')
@@ -111,8 +112,8 @@ app.post('/api/cars',(req,res)=>{
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // })
-// .then(() => console.log("✅ Connected to MongoDB"))
-// .catch((err) => console.error("❌ Error connecting to MongoDB:", err));
+// .then(() => console.log(" Connected to MongoDB"))
+// .catch((err) => console.error(" Error connecting to MongoDB:", err));
 
 
 //explanation in hindi

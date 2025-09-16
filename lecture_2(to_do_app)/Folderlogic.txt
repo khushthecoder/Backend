@@ -1,0 +1,118 @@
+/**
+ * ===========================================================
+ *  PROJECT STRUCTURE & FLOW EXPLANATION (MVC PATTERN)
+ * ===========================================================
+ *
+ *  1. index.js (ENTRY POINT)
+ *     - Express app start karta hai.
+ *     - Saare routes ko yaha register karte hain (app.use()).
+ *     - Example:
+ *          const todoRoutes = require("./routes/todos");
+ *          app.use("/todos", todoRoutes);
+ *
+ *  2. routes/ (ROUTES LAYER)
+ *     - Yaha specific endpoints define hote hain (GET, POST, PUT, DELETE).
+ *     - Ye sirf request ko controller ki taraf forward karta hai.
+ *     - Example: POST /todos/createTodo → createTodo controller function call.
+ *
+ *  3. controllers/ (BUSINESS LOGIC LAYER)
+ *     - Yaha request ka actual logic likha jata hai.
+ *     - Jaise: DB me insert karna, fetch karna, validation karna.
+ *     - Controller ke andar hum ORM (Prisma / Mongoose) ke through DB queries karte hain.
+ *
+ *  4. models/ (DATABASE LAYER)
+ *     - Database schema ya models define hote hain.
+ *     - Prisma use karte ho toh schema.prisma file me models define karte ho.
+ *     - Controller inhi models ke sath interact karta hai.
+ *
+ * ===========================================================
+ *  FLOW OF REQUEST
+ * ===========================================================
+ *
+ *  Client → index.js → routes → controller → model → Database
+ *     ↑
+ *     └────────────────────────────────────────────────────── Response wapas client ko
+ *
+ * ===========================================================
+ *  SIMPLE TEXT DIAGRAM
+ * ===========================================================
+ *
+ *   ┌───────────┐
+ *   │ index.js  │   (App entry point, routes register karta hai)
+ *   └─────┬─────┘
+ *         │
+ *         ▼
+ *   ┌──────────────┐
+ *   │ routes/      │   (Example: todos.js → /createTodo)
+ *   └─────┬────────┘
+ *         │
+ *         ▼
+ *   ┌──────────────┐
+ *   │ controllers/ │   (Business logic, DB queries)
+ *   └─────┬────────┘
+ *         │
+ *         ▼
+ *   ┌──────────────┐
+ *   │ models/      │   (DB schema, Prisma models)
+ *   └─────┬────────┘
+ *         │
+ *         ▼
+ *   ┌──────────────┐
+ *   │ Database     │   (MySQL via Prisma)
+ *   └──────────────┘
+ *
+ * ===========================================================
+ *  WHY THIS STRUCTURE?
+ * ===========================================================
+ * - Code clean & organized rehta hai.
+ * - Bade project me maintain karna easy hota hai.
+ * - Reusability: ek controller function multiple routes me use ho sakta hai.
+ * - Team work: alag developers alag layer pe kaam kar sakte hain.
+ *
+ * ===========================================================
+ */
+
+
+//.env logic
+/*
+   .env file ka use
+  -----------------------------------------
+  .env file ek environment configuration file hai 
+  jisme sensitive aur configurable values rakhi jaati hain, 
+  taaki hamare source code me directly passwords ya secrets 
+  na likhne padhe. Isse hamara project secure aur flexible banta hai.
+
+   .env file me commonly stored cheezein:
+  1. PORT number (server kis port par chalega)
+  2. Database URLs (MySQL, PostgreSQL, MongoDB, etc.)
+  3. Database usernames & passwords
+  4. API keys (Stripe, PayPal, Google, etc.)
+  5. JWT secrets ya encryption keys
+  6. Any environment specific settings (Development/Production)
+
+  ⚡ Example .env file:
+
+  # Server port number
+  PORT=3000
+
+  # MySQL Database connection URL
+  DATABASE_URL="mysql://root:P1234@localhost:3306/mydb"
+
+  # JWT Secret key for authentication
+  JWT_SECRET="mySuperSecretKey123"
+
+  # Stripe Payment API Secret Key
+  STRIPE_SECRET_KEY="sk_test_51J...."
+
+  # Example custom variable
+  APP_ENV="development"
+
+  -----------------------------------------
+  NOTE:
+  1. .env file ko kabhi bhi GitHub pe push nahi karna chahiye 
+     (usko .gitignore me daalna zaruri hai).
+  2. Har system (local, staging, production) apna khud ka 
+     .env rakh sakta hai with different values.
+  3. Node.js me dotenv library use karke is file ke values ko 
+     process.env ke through access kiya jaata hai.
+*/
